@@ -1,0 +1,17 @@
+<resources>
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color" />
+        <attr name="colorOnButton" format="color"/>
+        <attr name="colorButton" format="color"/>
+        <attr name="colorFaintButton" format="color"/>
+        <attr name="colorIconButton" format="color"/>
+        <attr name="colorText" format="color"/>
+        <attr name="colorFabMain" format="color"/>
+        <attr name="colorIcon" format="color"/>
+        <attr name="colorBackground" format="color"/>
+        <attr name="colorMain" format="color"/>
+        <attr name="colorOnMain" format="color"/>
+        <attr name="colorAccents" format="color"/>
+        <attr name="colorTextHint" format="color"/>
+    </declare-styleable>
+</resources>
