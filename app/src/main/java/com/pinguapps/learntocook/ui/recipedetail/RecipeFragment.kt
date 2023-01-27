@@ -1,4 +1,4 @@
-package com.pinguapps.learntocook
+package com.pinguapps.learntocook.ui.recipedetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.pinguapps.learntocook.data.Recipe
 import com.pinguapps.learntocook.databinding.FragmentRecipeBinding
-import com.pinguapps.learntocook.databinding.FragmentRecipeBookBinding
 import com.pinguapps.learntocook.ui.RecipeBookViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,7 +25,9 @@ class RecipeFragment : Fragment() {
     private var _binding: FragmentRecipeBinding? = null
     private val binding get() = _binding!!
     private var param1: String? = null
-    private val dashViewModel: RecipeBookViewModel by activityViewModels()
+    private val recipeBookViewModel: RecipeBookViewModel by activityViewModels()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,16 +42,38 @@ class RecipeFragment : Fragment() {
     ): View? {
         _binding = FragmentRecipeBinding.inflate(inflater, container, false)
         val view = binding.root
+        val currentRecipe = recipeBookViewModel.currentRecipe
+        val titleTextView = binding.title
+        titleTextView.text = currentRecipe.name
+
+        val ingredientRecyclerView = binding.recyclerIngredients
+        val instructionsRecyclerView = binding.recyclerInstructions
+
+        val ingredientAdapter = IngredientRecyclerAdapter()
+        ingredientAdapter.ingredients = currentRecipe.ingredients
+        ingredientRecyclerView.adapter = ingredientAdapter
+
+        val ingredientLayoutManager = LinearLayoutManager(requireContext())
+        ingredientRecyclerView.layoutManager = ingredientLayoutManager
+
+
+
+
+        binding.btnIngredients.setOnClickListener {
+            instructionsRecyclerView.visibility = View.GONE
+            ingredientRecyclerView.visibility = View.VISIBLE
+        }
+        binding.btnInstructions.setOnClickListener {
+            instructionsRecyclerView.visibility = View.VISIBLE
+            ingredientRecyclerView.visibility = View.GONE
+        }
         return view
-
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        val titleTextView = binding.title
+
     }
 
     companion object {
@@ -57,18 +82,15 @@ class RecipeFragment : Fragment() {
          * this fragment using the provided parameters.
          *
          * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment RecipeFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: String) =
             RecipeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                 }
             }
     }
-
-
 }

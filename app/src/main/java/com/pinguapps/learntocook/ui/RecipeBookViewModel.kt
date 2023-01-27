@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pinguapps.learntocook.data.Instructions
 import com.pinguapps.learntocook.data.Recipe
 import com.pinguapps.learntocook.data.remote.FirestoreRepository
 import com.pinguapps.learntocook.data.remote.Response
@@ -17,6 +18,8 @@ class RecipeBookViewModel: ViewModel() {
 
     private val _allRecipes = MutableStateFlow(listOf<Recipe>())
     val allRecipes: StateFlow<List<Recipe>> = _allRecipes
+
+    var currentRecipe = Recipe(name = "", instructions = Instructions(), time = 30)
 
     val recipes = MutableLiveData(listOf<Recipe>())
 
