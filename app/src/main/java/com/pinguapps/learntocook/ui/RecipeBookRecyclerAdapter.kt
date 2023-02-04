@@ -3,7 +3,10 @@ package com.pinguapps.learntocook.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.pinguapps.learntocook.R
 import com.pinguapps.learntocook.data.Recipe
 import com.pinguapps.learntocook.databinding.RecipeBookRowLayoutBinding
 
@@ -12,7 +15,8 @@ class RecipeBookRecyclerAdapter(
 ): RecyclerView.Adapter<RecipeBookRecyclerAdapter.ViewHolder>(
 
 ) {
-    var recipes = listOf<Recipe>()
+    var recipes = arrayListOf<Recipe>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(RecipeBookRowLayoutBinding.inflate(
@@ -32,6 +36,12 @@ class RecipeBookRecyclerAdapter(
         holder.recipeImage.setOnClickListener {
             onItemClicked(recipe)
         }
+
+        val imageUrl = recipe.photo.url
+        Glide.with(holder.itemView.context)
+            .load(imageUrl)
+            //.placeholder(R.drawable.avatar_default)
+            .into(holder.recipeImage)
     }
     inner class ViewHolder(binding: RecipeBookRowLayoutBinding): RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
@@ -53,3 +63,4 @@ class RecipeBookRecyclerAdapter(
     }
 
 }
+

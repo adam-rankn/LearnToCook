@@ -47,7 +47,6 @@ class RecipeFragment : Fragment() {
         titleTextView.text = currentRecipe.name
 
         val ingredientRecyclerView = binding.recyclerIngredients
-        val instructionsRecyclerView = binding.recyclerInstructions
 
         val ingredientAdapter = IngredientRecyclerAdapter()
         ingredientAdapter.ingredients = currentRecipe.ingredients
@@ -56,8 +55,13 @@ class RecipeFragment : Fragment() {
         val ingredientLayoutManager = LinearLayoutManager(requireContext())
         ingredientRecyclerView.layoutManager = ingredientLayoutManager
 
+        val instructionsRecyclerView = binding.recyclerInstructions
+        val instructionAdapter = InstructionsRecyclerAdapter()
+        instructionAdapter.instructions = currentRecipe.instructions
+        instructionsRecyclerView.adapter = instructionAdapter
 
-
+        val instructionLayoutManager = LinearLayoutManager(requireContext())
+        instructionsRecyclerView.layoutManager = instructionLayoutManager
 
         binding.btnIngredients.setOnClickListener {
             instructionsRecyclerView.visibility = View.GONE
@@ -67,6 +71,7 @@ class RecipeFragment : Fragment() {
             instructionsRecyclerView.visibility = View.VISIBLE
             ingredientRecyclerView.visibility = View.GONE
         }
+
         return view
     }
 

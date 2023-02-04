@@ -1,19 +1,17 @@
 package com.pinguapps.learntocook.data.remote
 
-import android.content.ContentValues.TAG
-import android.util.Log
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.pinguapps.learntocook.data.Ingredient
-import com.pinguapps.learntocook.data.Instructions
+import com.pinguapps.learntocook.data.Instruction
+import com.pinguapps.learntocook.data.Photo
 import com.pinguapps.learntocook.data.Recipe
 
 fun recipeMapToClass(document: DocumentSnapshot): Recipe {
     val name: String = document["name"] as String
     val time: String = document["time"] as String
     val ingredients = arrayListOf<Ingredient>()
-    val instructions = Instructions()
+    val url = document["photo"] ?: ""
+    val photo  = Photo(url as String)
 
     val ingredientList = document["ingredients"] as List<Map<String,String>>
 
@@ -24,14 +22,22 @@ fun recipeMapToClass(document: DocumentSnapshot): Recipe {
         ingredients.add(Ingredient(ingredientName,amount,tips))
     }
 
+    val instructions = mutableListOf<Instruction>()
+    val instructionsList = document["instructions"] as List<String>
+
+    for (entry in instructionsList) {
+        val instruction = Instruction(entry)
+        instructions.add(instruction)
+    }
+
 
     return Recipe(
         name = name,
         time = time.toInt(),
-        ingredients,
-        instructions
-
-
+        ingredients = ingredients,
+        instructions = instructions,
+        photo = photo,
+        tags = mutableListOf()
     )
 
 

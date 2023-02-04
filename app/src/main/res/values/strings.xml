@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
+    <string name="diet">filter by dietary restriction</string>
+    <string name="vegetarian">Vegetarian</string>
 </resources>

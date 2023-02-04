@@ -4,11 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pinguapps.learntocook.R
+import com.pinguapps.learntocook.data.Recipe
 import com.pinguapps.learntocook.databinding.FragmentRecipeBookBinding
 import com.pinguapps.learntocook.ui.recipedetail.RecipeFragment
 import com.pinguapps.learntocook.util.isTablet
@@ -41,9 +45,37 @@ class RecipeBookFragment: Fragment() {
 
 
         recipeBookViewModel.recipes.observe(viewLifecycleOwner) { recipes ->
-            recipeBookAdapter.recipes = recipes
+            recipeBookAdapter.recipes = recipes as ArrayList<Recipe>
             recipeBookAdapter.notifyDataSetChanged()
 
+        }
+
+        val search = binding.recipeSearch
+
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                recipeBookViewModel.filterBySearch(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                recipeBookViewModel.filterBySearch(newText)
+                return true
+            }
+
+        })
+
+
+        val showFiltersButton = binding.btnDiet
+        val dietLayout = binding.dietFilterLay
+
+        showFiltersButton.setOnClickListener {
+            if (dietLayout.visibility == GONE) {
+                dietLayout.visibility = VISIBLE
+            }
+            else if (dietLayout.visibility == VISIBLE) {
+                dietLayout.visibility = GONE
+            }
         }
 
         val view = binding.root

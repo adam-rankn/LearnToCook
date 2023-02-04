@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.RecipeBookFragment">
 
     <LinearLayout
@@ -10,30 +11,94 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.google.android.material.button.MaterialButtonToggleGroup
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/recipe_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                app:queryHint="search recipes"
+                app:defaultQueryHint="search recipes"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"/>
+
+            <ImageButton
+                android:id="@+id/btn_diet"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/diet"
+                android:layout_margin="8dp"
+                android:contentDescription="@string/diet">
+
+            </ImageButton>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/diet_filter_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Time">
-            </com.google.android.material.button.MaterialButton>
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="People">
-            </com.google.android.material.button.MaterialButton>
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Tag">
-            </com.google.android.material.button.MaterialButton>
-        </com.google.android.material.button.MaterialButtonToggleGroup>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_vegetarian"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/vegetarian"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_vegan"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Vegan"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_soy"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Soy Free"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_peanut"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Peanut Free"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_dairy"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Dairy Free"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_gluten"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Gluten Free"/>
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recipe_book_recycler"

@@ -1,4 +1,5 @@
 package com.pinguapps.learntocook.data
 
-class Photo {
-}
+class Photo (
+    val url: String
+    )
