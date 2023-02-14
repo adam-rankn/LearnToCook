@@ -34,19 +34,45 @@
             android:text="@string/instructions"/>
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_ingredients"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_instructions"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btn_scale"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:src="@drawable/scale_balance" />
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scale Ingredients">
+
+            </com.google.android.material.textview.MaterialTextView>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:visibility="gone">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:visibility="gone">
+        </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
 
 </LinearLayout>

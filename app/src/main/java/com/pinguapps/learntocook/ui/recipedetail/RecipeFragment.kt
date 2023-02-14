@@ -1,5 +1,6 @@
 package com.pinguapps.learntocook.ui.recipedetail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pinguapps.learntocook.data.Ingredient
 import com.pinguapps.learntocook.data.Recipe
 import com.pinguapps.learntocook.databinding.FragmentRecipeBinding
 import com.pinguapps.learntocook.ui.RecipeBookViewModel
+import com.pinguapps.learntocook.util.parseAmount
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,22 +39,48 @@ class RecipeFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRecipeBinding.inflate(inflater, container, false)
         val view = binding.root
+
         val currentRecipe = recipeBookViewModel.currentRecipe
+
+
         val titleTextView = binding.title
-        titleTextView.text = currentRecipe.name
+        titleTextView.text = currentRecipe!!.name
 
         val ingredientRecyclerView = binding.recyclerIngredients
 
         val ingredientAdapter = IngredientRecyclerAdapter()
-        ingredientAdapter.ingredients = currentRecipe.ingredients
-        ingredientRecyclerView.adapter = ingredientAdapter
 
+        recipeBookViewModel.currentRecipeScale.observe(viewLifecycleOwner) { scale ->
+            val ingredients = currentRecipe.ingredients
+            val scaledIngredients = currentRecipe.ingredients.map {
+                Ingredient(
+                    unit = it.unit,
+                    amount= parseAmount(it.unit,it.amount,scale),
+                    name = it.name,
+                    tips = it.tips
+                )
+            }
+            ingredientAdapter.ingredients = scaledIngredients
+            ingredientAdapter.notifyDataSetChanged()
+
+        }
+        ingredientAdapter.ingredients = currentRecipe.ingredients
+
+        val scaleIngredientsButton = binding.btnScale
+
+        scaleIngredientsButton.setOnClickListener {
+            recipeBookViewModel.currentRecipeScale.postValue(2)
+            //todo implement popup
+        }
+
+        ingredientRecyclerView.adapter = ingredientAdapter
         val ingredientLayoutManager = LinearLayoutManager(requireContext())
         ingredientRecyclerView.layoutManager = ingredientLayoutManager
 

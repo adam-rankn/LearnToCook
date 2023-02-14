@@ -16,6 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Button>
+
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/recipe_search"
                 android:layout_width="0dp"
@@ -45,6 +51,7 @@
             android:orientation="horizontal"
             android:visibility="gone">
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/diet_chip_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -56,7 +63,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/vegetarian"/>
+                    android:text="@string/vegetarian"
+                    android:contentDescription="@string/vegetarian"
+                    android:tag="vegetarian"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_vegan"
@@ -64,7 +73,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Vegan"/>
+                    android:text="@string/vegan"
+                    android:contentDescription="@string/vegan"
+                    android:tag="vegan"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_soy"
@@ -72,28 +83,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Soy Free"/>
+                    android:text="@string/soy_free"
+                    android:contentDescription="@string/soy_free"
+                    android:tag="soy free"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_peanut"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Peanut Free"/>
+                    android:text="@string/peanut_free"
+                    android:contentDescription="@string/peanut_free"
+                    android:tag="peanut free"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_dairy"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Dairy Free"/>
+                    android:text="@string/dairy_free"
+                    android:contentDescription="@string/dairy_free"
+                    android:tag="dairy free"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_gluten"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Gluten Free"/>
+                    android:text="@string/gluten_free"
+                    android:contentDescription="@string/gluten_free"
+                    android:tag="gluten free"/>
 
 
             </com.google.android.material.chip.ChipGroup>

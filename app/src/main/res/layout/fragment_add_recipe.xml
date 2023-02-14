@@ -21,5 +21,79 @@
         android:hint="time"
         tools:ignore="HardcodedText" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edt_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="ingredient" />
+
+        <EditText
+            android:id="@+id/edt_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="#" />
+        <EditText
+            android:id="@+id/edt_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="TSP" />
+
+        <EditText
+            android:id="@+id/edt_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="tip" />
+
+        <Button
+            android:id="@+id/add_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/edt_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="instruction">
+    </EditText>
+    <Button
+        android:id="@+id/add_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edt_diet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="diet">
+        </EditText>
+        <Button
+            android:id="@+id/add_diet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_recipe_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add recipe">
+
+    </Button>
+
 </LinearLayout>
 

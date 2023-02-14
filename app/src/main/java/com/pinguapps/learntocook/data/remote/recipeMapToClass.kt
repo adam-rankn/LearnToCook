@@ -18,8 +18,9 @@ fun recipeMapToClass(document: DocumentSnapshot): Recipe {
     for (entry: Map<String,String> in ingredientList) {
         val ingredientName: String = entry["name"]!!
         val amount: String = entry["amount"]!!
+        val unit: String = entry["unit"] ?: ""
         val tips: String = entry["tips"] ?: ""
-        ingredients.add(Ingredient(ingredientName,amount,tips))
+        ingredients.add(Ingredient(ingredientName,amount,unit,tips))
     }
 
     val instructions = mutableListOf<Instruction>()
@@ -30,6 +31,8 @@ fun recipeMapToClass(document: DocumentSnapshot): Recipe {
         instructions.add(instruction)
     }
 
+    val dietsMap = document["diets"] as HashMap<String,Boolean> ?: hashMapOf()
+
 
     return Recipe(
         name = name,
@@ -37,7 +40,8 @@ fun recipeMapToClass(document: DocumentSnapshot): Recipe {
         ingredients = ingredients,
         instructions = instructions,
         photo = photo,
-        tags = mutableListOf()
+        tags = mutableListOf(),
+        diets = dietsMap
     )
 
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.pinguapps.learntocook.data.Instruction
 import com.pinguapps.learntocook.data.Photo
 import com.pinguapps.learntocook.data.Recipe
+import com.pinguapps.learntocook.data.getDiets
 import com.pinguapps.learntocook.data.remote.FirestoreRepository
 import com.pinguapps.learntocook.data.remote.Response
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,12 +18,16 @@ class RecipeBookViewModel: ViewModel() {
 
     private val repository = FirestoreRepository()
 
-    val searchText = ""
+    var searchText = ""
 
-    var currentRecipe = Recipe(name = "", instructions = mutableListOf(), time = 30, photo = Photo(""), tags = mutableListOf())
+    var currentRecipe = Recipe()
+    val currentRecipeScale = MutableLiveData(1)
+
 
     val allRecipes = MutableLiveData(mutableListOf<Recipe>())
     val recipes = MutableLiveData(mutableListOf<Recipe>())
+
+    val currentFilters = getDiets()
 
     init {
         //get all recipes
@@ -36,26 +41,49 @@ class RecipeBookViewModel: ViewModel() {
                     allRecipes.postValue(response.data)
                 }
                 is Response.Failure -> {
-                    Log.e("PROFILE", "failed to load recipes: ${response.e}")
+                    Log.e("FIRESTORE", "failed to load recipes: ${response.e}")
                 }
             }
         }
     }
 
-    fun filterBySearch(text: String) {
+    private fun updateDisplayList() {
         val filteredList = arrayListOf<Recipe>()
-        if (text == ""){
+        if (searchText == "" && !currentFilters.containsValue(true)){
             recipes.postValue(allRecipes.value)
         }
         else {
             for (recipe in allRecipes.value!!) {
-                if (recipe.name.lowercase().contains(text)) {
-                    filteredList.add(recipe)
+                if (recipe.name.lowercase().contains(searchText)
+                    || recipe.tags.contains(searchText.lowercase())  ) {
+
+                    //check diet restrictions
+                    var matchesFilters = true
+                    for (diet in currentFilters){
+                        if (diet.value == true){
+                            if (recipe.diets[diet.key] == false){
+                                matchesFilters = false
+                            }
+                        }
+                    }
+                    if (matchesFilters){
+                        filteredList.add(recipe)
+                    }
                 }
                 //TODO check ingredients etc
             }
             recipes.postValue(filteredList)
         }
 
+    }
+
+    fun updateDietFilter(diet: String, isActive: Boolean){
+        currentFilters[diet] = isActive
+        updateDisplayList()
+    }
+
+    fun updateSearchText(query: String){
+        searchText = query
+        updateDisplayList()
     }
 }

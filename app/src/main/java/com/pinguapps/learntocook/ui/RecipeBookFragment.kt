@@ -7,10 +7,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
 import com.pinguapps.learntocook.R
 import com.pinguapps.learntocook.data.Recipe
 import com.pinguapps.learntocook.databinding.FragmentRecipeBookBinding
@@ -54,15 +57,14 @@ class RecipeBookFragment: Fragment() {
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                recipeBookViewModel.filterBySearch(query)
+                recipeBookViewModel.updateSearchText(query)
                 return true
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                recipeBookViewModel.filterBySearch(newText)
+            override fun onQueryTextChange(query: String): Boolean {
+                recipeBookViewModel.updateSearchText(query)
                 return true
             }
-
         })
 
 
@@ -76,6 +78,26 @@ class RecipeBookFragment: Fragment() {
             else if (dietLayout.visibility == VISIBLE) {
                 dietLayout.visibility = GONE
             }
+        }
+
+        val dietChipGroup = binding.dietChipGroup
+
+        for (chip in dietChipGroup){
+            if (chip is Chip){
+
+                chip.setOnCheckedChangeListener { _, isChecked ->
+                    recipeBookViewModel.updateDietFilter(chip.tag.toString(), isChecked)
+                }
+            }
+
+        }
+
+        val addbtn = binding.btnAdd
+
+        addbtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container, AddRecipeFragment()).addToBackStack("home")
+                .commit()
         }
 
         val view = binding.root
