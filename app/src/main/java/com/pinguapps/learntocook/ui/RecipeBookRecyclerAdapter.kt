@@ -3,11 +3,9 @@ package com.pinguapps.learntocook.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.pinguapps.learntocook.R
-import com.pinguapps.learntocook.data.Recipe
+import com.pinguapps.learntocook.data.local.model.Recipe
 import com.pinguapps.learntocook.databinding.RecipeBookRowLayoutBinding
 
 class RecipeBookRecyclerAdapter(

@@ -4,7 +4,7 @@ fun parseAmount(unit: String, amount: String, scale: Int = 1, metric: Boolean = 
 
     var parsedString = ""
 
-    if (amount == "0"){
+    if ((amount == "0") || (amount == "")){
         return ""
     }
 

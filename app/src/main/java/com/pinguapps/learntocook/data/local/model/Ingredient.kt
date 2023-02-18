@@ -1,4 +1,4 @@
-package com.pinguapps.learntocook.data
+package com.pinguapps.learntocook.data.local.model
 
 class Ingredient (
     val name: String,

@@ -1,20 +1,17 @@
 package com.pinguapps.learntocook.ui
 
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import com.pinguapps.learntocook.R
-import com.pinguapps.learntocook.data.Ingredient
-import com.pinguapps.learntocook.data.Instruction
-import com.pinguapps.learntocook.data.Recipe
-import com.pinguapps.learntocook.data.getDiets
+import com.pinguapps.learntocook.data.local.model.Ingredient
+import com.pinguapps.learntocook.data.local.model.Instruction
+import com.pinguapps.learntocook.data.local.model.Recipe
+import com.pinguapps.learntocook.data.local.getDiets
 import com.pinguapps.learntocook.data.remote.FirestoreRepository
 import com.pinguapps.learntocook.databinding.FragmentAddRecipeBinding
-import com.pinguapps.learntocook.databinding.FragmentRecipeBookBinding
 import kotlinx.coroutines.launch
 
 
@@ -66,12 +63,14 @@ class AddRecipeFragment : Fragment() {
             val amount = amtEdt.text.toString()
             val tip = tipEdt.text.toString()
             val unit = unitEdt.text.toString()
-            ingredients.add(Ingredient(
+            ingredients.add(
+                Ingredient(
                 name = name,
                 amount = amount,
                 tips = tip,
                 unit = unit
-                ))
+                )
+            )
 
             grdEdt.text = null
             amtEdt.text = null

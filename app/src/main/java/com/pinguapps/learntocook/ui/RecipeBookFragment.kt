@@ -7,7 +7,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
@@ -15,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.pinguapps.learntocook.R
-import com.pinguapps.learntocook.data.Recipe
+import com.pinguapps.learntocook.data.local.model.Recipe
 import com.pinguapps.learntocook.databinding.FragmentRecipeBookBinding
 import com.pinguapps.learntocook.ui.recipedetail.RecipeFragment
 import com.pinguapps.learntocook.util.isTablet

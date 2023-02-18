@@ -3,13 +3,9 @@ package com.pinguapps.learntocook.ui.recipedetail
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.pinguapps.learntocook.data.Ingredient
-import com.pinguapps.learntocook.data.Recipe
+import com.pinguapps.learntocook.data.local.model.Ingredient
 import com.pinguapps.learntocook.databinding.IngredientRowLayoutBinding
-import com.pinguapps.learntocook.databinding.RecipeBookRowLayoutBinding
-import com.pinguapps.learntocook.ui.RecipeBookViewModel
 import com.pinguapps.learntocook.util.parseAmount
 
 class IngredientRecyclerAdapter(
@@ -29,11 +25,6 @@ class IngredientRecyclerAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ingredient = ingredients[position]
         holder.title.text = ingredient.name
-
-
-        val amountString = parseAmount(ingredient.unit,ingredient.amount,1)
-
-
 
         holder.amount.text = "${ingredient.amount} ${ingredient.unit}"
         holder.tips.text = ingredient.tips

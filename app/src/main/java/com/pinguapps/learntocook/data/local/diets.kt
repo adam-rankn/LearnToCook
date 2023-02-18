@@ -1,4 +1,4 @@
-package com.pinguapps.learntocook.data
+package com.pinguapps.learntocook.data.local
 
 fun getDiets(): HashMap<String, Boolean> {
 

@@ -11,4 +11,6 @@
     <string name="peanut_free">Peanut Free</string>
     <string name="dairy_free">Dairy Free</string>
     <string name="gluten_free">Gluten Free</string>
+    <string name="scale">Scale:</string>
+    <string name="scale_ingredients">Scale Ingredients</string>
 </resources>

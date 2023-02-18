@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pinguapps.learntocook.data.Instruction
+import com.pinguapps.learntocook.data.local.model.Instruction
 import com.pinguapps.learntocook.databinding.InstructionRowLayoutBinding
 
 

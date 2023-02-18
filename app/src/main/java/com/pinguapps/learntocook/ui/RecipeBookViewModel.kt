@@ -4,14 +4,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pinguapps.learntocook.data.Instruction
-import com.pinguapps.learntocook.data.Photo
-import com.pinguapps.learntocook.data.Recipe
-import com.pinguapps.learntocook.data.getDiets
+import com.pinguapps.learntocook.data.local.model.Recipe
+import com.pinguapps.learntocook.data.local.getDiets
 import com.pinguapps.learntocook.data.remote.FirestoreRepository
 import com.pinguapps.learntocook.data.remote.Response
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class RecipeBookViewModel: ViewModel() {

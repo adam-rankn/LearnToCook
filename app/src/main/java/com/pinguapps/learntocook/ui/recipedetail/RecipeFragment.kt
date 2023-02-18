@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pinguapps.learntocook.data.Ingredient
-import com.pinguapps.learntocook.data.Recipe
+import com.bumptech.glide.Glide
+import com.pinguapps.learntocook.data.local.model.Ingredient
 import com.pinguapps.learntocook.databinding.FragmentRecipeBinding
 import com.pinguapps.learntocook.ui.RecipeBookViewModel
 import com.pinguapps.learntocook.util.parseAmount
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 
@@ -49,9 +48,18 @@ class RecipeFragment : Fragment() {
 
         val currentRecipe = recipeBookViewModel.currentRecipe
 
+        val recipeImageView = binding.recipeImage
+        val recipeDescription = binding.recipeDescription
+
+        Glide.with(requireContext())
+            .load(currentRecipe.photo.url)
+            .into(recipeImageView)
+
+        recipeDescription.text = currentRecipe.description
+
 
         val titleTextView = binding.title
-        titleTextView.text = currentRecipe!!.name
+        titleTextView.text = currentRecipe.name
 
         val ingredientRecyclerView = binding.recyclerIngredients
 
@@ -77,7 +85,11 @@ class RecipeFragment : Fragment() {
 
         scaleIngredientsButton.setOnClickListener {
             recipeBookViewModel.currentRecipeScale.postValue(2)
-            //todo implement popup
+
+            val popup = ScaleIngredientsPopup { scale ->
+                recipeBookViewModel.currentRecipeScale.postValue(scale)
+            }
+            popup.showPopup(scaleIngredientsButton,requireContext())
         }
 
         ingredientRecyclerView.adapter = ingredientAdapter
@@ -92,13 +104,14 @@ class RecipeFragment : Fragment() {
         val instructionLayoutManager = LinearLayoutManager(requireContext())
         instructionsRecyclerView.layoutManager = instructionLayoutManager
 
+        val ingredientLayout = binding.layoutIngredients
         binding.btnIngredients.setOnClickListener {
             instructionsRecyclerView.visibility = View.GONE
-            ingredientRecyclerView.visibility = View.VISIBLE
+            ingredientLayout.visibility = View.VISIBLE
         }
         binding.btnInstructions.setOnClickListener {
             instructionsRecyclerView.visibility = View.VISIBLE
-            ingredientRecyclerView.visibility = View.GONE
+            ingredientLayout.visibility = View.GONE
         }
 
         return view

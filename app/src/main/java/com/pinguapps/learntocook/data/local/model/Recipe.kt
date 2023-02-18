@@ -1,6 +1,11 @@
-package com.pinguapps.learntocook.data
+package com.pinguapps.learntocook.data.local.model
 
-class Recipe(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "items")
+data class Recipe(
+    @PrimaryKey(autoGenerate = true) val id: Int? = null,
     val name: String = "",
     val description: String = "",
     val time: Int = 30,

@@ -1,10 +1,10 @@
 package com.pinguapps.learntocook.data.remote
 
 import com.google.firebase.firestore.DocumentSnapshot
-import com.pinguapps.learntocook.data.Ingredient
-import com.pinguapps.learntocook.data.Instruction
-import com.pinguapps.learntocook.data.Photo
-import com.pinguapps.learntocook.data.Recipe
+import com.pinguapps.learntocook.data.local.model.Ingredient
+import com.pinguapps.learntocook.data.local.model.Instruction
+import com.pinguapps.learntocook.data.local.model.Photo
+import com.pinguapps.learntocook.data.local.model.Recipe
 
 fun recipeMapToClass(document: DocumentSnapshot): Recipe {
     val name: String = document["name"] as String
@@ -12,6 +12,7 @@ fun recipeMapToClass(document: DocumentSnapshot): Recipe {
     val ingredients = arrayListOf<Ingredient>()
     val url = document["photo"] ?: ""
     val photo  = Photo(url as String)
+    val description: String = (document["description"] ?: "") as String
 
     val ingredientList = document["ingredients"] as List<Map<String,String>>
 
@@ -41,7 +42,9 @@ fun recipeMapToClass(document: DocumentSnapshot): Recipe {
         instructions = instructions,
         photo = photo,
         tags = mutableListOf(),
-        diets = dietsMap
+        diets = dietsMap,
+        description = description
+
     )
 
 
